@@ -23,7 +23,6 @@ variables:
       paths:
         - .venv
 
-
 test:
   extends:
     - .venv
@@ -36,3 +35,15 @@ test:
       - IMAGE: python:3.8
       - IMAGE: python:3.10
       - IMAGE: python:3.11
+
+release:
+  extends:
+    - .venv
+  stage: release
+  image: python:3.11
+  only:
+    - tags
+  script:
+    - poetry config repositories.gitlab https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/pypi
+    - poetry config http-basic.gitlab gitlab-ci-token ${CI_JOB_TOKEN}
+    - poetry publish -r gitlab
