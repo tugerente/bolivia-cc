@@ -3,21 +3,20 @@ stages:
   - release
 
 variables:
-  XDG_CACHE_HOME: : "${CI_PROJECT_DIR}/.cache"
+  XDG_CACHE_HOME: "${CI_PROJECT_DIR}/.cache"
 
 .venv:
   before_script:
     - pip install poetry
-    - poetry config settings.virtualenvs.in-project true
+    - poetry config virtualenvs.in-project true
     - poetry install -vv
   cache:
-    - key:
-      prefix: "cache"
+    - key: cache
       paths:
         - .cache
 
     - key:
-        prefix: "venv"
+        prefix: venv
         files:
           - poetry.lock
           - pyproject.toml
