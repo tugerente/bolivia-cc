@@ -2,20 +2,32 @@ stages:
   - test
   - release
 
+variables:
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
+
 .venv:
   before_script:
-    - poetry install
+    - pip install poetry
+    - poetry install -vv
   cache:
     key:
-      prefix: venv
+      prefix: "${CI_JOB_NAME}"
       files:
         - poetry.lock
+        - pyproject.toml
     paths:
-      - ./.venv
+      - .venv
+      - .cache/pip
 
 test:
   extends:
     - .venv
   stage: test
+  image: ${IMAGE}
   script:
     - poetry run pytest -x tests/
+  parallel:
+    matrix:
+      - IMAGE: python:3.8
+      - IMAGE: python:3.10
+      - IMAGE: python:3.11
