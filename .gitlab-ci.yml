@@ -3,6 +3,7 @@ stages:
   - release
 
 variables:
+  XDG_CACHE_HOME: : "${CI_PROJECT_DIR}/.cache"
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
 
 .venv:
