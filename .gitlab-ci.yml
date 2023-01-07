@@ -8,6 +8,7 @@ variables:
 .venv:
   before_script:
     - pip install poetry
+    - poetry config settings.virtualenvs.in-project true
     - poetry install -vv
   cache:
     key:
