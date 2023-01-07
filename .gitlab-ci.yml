@@ -1,0 +1,21 @@
+stages:
+  - test
+  - release
+
+.venv:
+  before_script:
+    - poetry install
+  cache:
+    key:
+      prefix: venv
+      files:
+        - poetry.lock
+    paths:
+      - ./.venv
+
+test:
+  extends:
+    - .venv
+  stage: test
+  script:
+    - poetry run pytest -x tests/

@@ -64,7 +64,7 @@
     enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 [tool.pytest.ini_options]
-    addopts   = "-n auto"
+    addopts   = "-vv"
     testpaths = ["tests"]
 
 [tool.coverage.report]
