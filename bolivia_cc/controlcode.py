@@ -1,4 +1,4 @@
-from math import ceil, floor
+from math import floor
 from re import findall
 
 from bolivia_cc.utils import arc4_encrypt, base10to64, checksum_verhoeff, round_half_up

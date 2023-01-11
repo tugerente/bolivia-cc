@@ -1,4 +1,4 @@
-from bolivia_cc.controlcode import generate_control_code
+from bolivia_cc import generate_control_code
 from tests.conftest import Caso
 
 
