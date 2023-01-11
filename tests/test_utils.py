@@ -2,7 +2,8 @@ from bolivia_cc.utils import arc4_encrypt, checksum_verhoeff
 
 
 def test_checksum_verhoeff():
-    assert checksum_verhoeff(1, 1) == 15
+    assert checksum_verhoeff("1", 1) == "15"
+    assert checksum_verhoeff("0", 2) == "047"
 
     # Ejemplos obtenidos de la documentacion tecnica oficial.
 
@@ -11,10 +12,10 @@ def test_checksum_verhoeff():
     # Fecha de la Transacción: 20070702-01
     # Monto de la Transacción: 2500-31
 
-    assert checksum_verhoeff(1503, 2) == 1503_12
-    assert checksum_verhoeff(4189179011, 2) == 4189179011_58
-    assert checksum_verhoeff(20070702, 2) == 20070702_01
-    assert checksum_verhoeff(2500, 2) == 2500_31
+    assert checksum_verhoeff("1503", 2) == "150312"
+    assert checksum_verhoeff("4189179011", 2) == "418917901158"
+    assert checksum_verhoeff("20070702", 2) == "2007070201"
+    assert checksum_verhoeff("2500", 2) == "250031"
 
 
 def test_arc4_encrypt():

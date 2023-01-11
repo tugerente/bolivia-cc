@@ -1,6 +1,7 @@
-from typing import Tuple
+from math import floor
+from typing import Tuple, List
 
-MatrixType = Tuple[Tuple[int]]
+MatrixType = Tuple[Tuple[int, ...], ...]
 
 MULTIPLICATION: MatrixType = (
     (0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
@@ -26,35 +27,34 @@ PERMUTATION: MatrixType = (
     (7, 0, 4, 6, 9, 1, 3, 2, 5, 8),
 )
 
-INVERSE: Tuple[int] = (0, 4, 3, 2, 1, 5, 6, 7, 8, 9)
+INVERSE = (0, 4, 3, 2, 1, 5, 6, 7, 8, 9)
+
+ARC4_INITIAL_STATE: List[int] = [i for i in range(256)]
 
 
-ARC4_INITIAL_STATE: Tuple[int] = tuple([i for i in range(256)])
-
-
-def checksum_verhoeff(num: int, digits: int) -> int:
+def checksum_verhoeff(num: str, digits: int) -> str:
     """
     Calculate the Verhoeff checksum over the provided number, iterating a given number of `times`.
     The checksum is returned as an int. Valid numbers should have a checksum of 0.
     """
-    num = str(num)
 
     for i in range(digits, 0, -1):  # Repeat validation n times
         check = 0
         length = len(str(num))
+
         for i in range(length - 1, -1, -1):
             check = MULTIPLICATION[check][
                 PERMUTATION[((length - i) % 8)][int(str(num)[i])]
             ]
-        num += str(INVERSE[check])
+        num = f"{num}{INVERSE[check]}"
 
-    return int(num)
+    return num
 
 
 def arc4_encrypt(data: str, key: str) -> str:
     """Encrypt a piece of data using RC4 (Rivest's Cipher version 4)"""
 
-    state: MatrixType = list(ARC4_INITIAL_STATE)
+    state = ARC4_INITIAL_STATE.copy()
 
     # Sign initial state with the key
     j: int = 0
@@ -78,3 +78,14 @@ def arc4_encrypt(data: str, key: str) -> str:
         output += format(ord(data[i]) ^ state[(state[x] + state[y]) % 256], "02x")
 
     return output.upper()
+
+
+def base10to64(number: int):
+    result = ""
+    dictionary = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/"
+
+    while number > 0:
+        result = dictionary[int(number % 64)] + result
+        number = floor(number // 64)
+
+    return result
