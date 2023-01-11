@@ -91,6 +91,7 @@ def base10to64(number: int) -> str:
     return result
 
 
-def round_half_up(n, decimals=0):
-    multiplier = 10**decimals
+def round_half_up(n: float, decimals: int = 0) -> float:
+    """Round a float value to half or up."""
+    multiplier: int = 10**decimals
     return floor(n * multiplier + 0.5) / multiplier
