@@ -37,4 +37,4 @@ jobs:
           poetry install -vv
 
       - name: Run tests
-        run: poetry run pytest -x tests/
+        run: poetry run pytest -x --cov=bolivia_cc tests/
