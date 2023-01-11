@@ -1,4 +1,5 @@
-from bolivia_cc.utils import arc4_encrypt, checksum_verhoeff
+from bolivia_cc.utils import arc4_encrypt
+from bolivia_cc.utils import checksum_verhoeff
 
 
 def test_checksum_verhoeff():

@@ -1,5 +1,6 @@
 from math import floor
-from typing import Tuple, List
+from typing import List
+from typing import Tuple
 
 MatrixType = Tuple[Tuple[int, ...], ...]
 

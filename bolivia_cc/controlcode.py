@@ -1,9 +1,12 @@
+from base64 import b64encode
+from math import floor
 from re import findall
 from typing import Union
-from math import floor
-from base64 import b64encode
 
-from bolivia_cc.utils import arc4_encrypt, base10to64, checksum_verhoeff
+from bolivia_cc.utils import arc4_encrypt
+from bolivia_cc.utils import base10to64
+from bolivia_cc.utils import checksum_verhoeff
+
 
 def generate_control_code(
     *,
@@ -20,7 +23,7 @@ def generate_control_code(
     nitci = checksum_verhoeff(nitci, 2)
     fecha = checksum_verhoeff(fecha, 2)
 
-    monto = str(int(round(float(monto)))) # Strip decimals by round
+    monto = str(int(round(float(monto))))  # Strip decimals by round
     monto = checksum_verhoeff(monto, 2)
 
     suma: int = sum(map(int, [factura, nitci, fecha, monto]))
