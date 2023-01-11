@@ -80,7 +80,7 @@ def arc4_encrypt(data: str, key: str) -> str:
     return output.upper()
 
 
-def base10to64(number: int):
+def base10to64(number: int) -> str:
     result = ""
     dictionary = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/"
 
