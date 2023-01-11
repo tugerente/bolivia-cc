@@ -1,6 +1,6 @@
 [tool.poetry]
     name        = "bolivia-cc"
-    version     = "0.1.0"
+    version     = "0.1.1a0"
     description = "El código de control es un dato alfanumérico generado por un sistema de facturación y sirve para determinar la validez o no de una factura en Bolivia."
     authors     = []
     license     = "Apache License 2.0"
