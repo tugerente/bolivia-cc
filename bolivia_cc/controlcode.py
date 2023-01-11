@@ -1,7 +1,7 @@
-from math import floor
+from math import ceil, floor
 from re import findall
 
-from bolivia_cc.utils import arc4_encrypt, base10to64, checksum_verhoeff
+from bolivia_cc.utils import arc4_encrypt, base10to64, checksum_verhoeff, round_half_up
 
 
 def generate_control_code(
@@ -14,12 +14,17 @@ def generate_control_code(
     llave: str,
 ) -> str:
     """Genera un codigo de control para los parametros dados."""
-
     factura = checksum_verhoeff(factura, 2)
     nitci = checksum_verhoeff(nitci, 2)
+
+    # Clean date format: '2008/05/19' -> '20080519'
+    fecha = fecha.replace("/", "").replace("-", "").strip()
     fecha = checksum_verhoeff(fecha, 2)
 
-    monto = str(int(round(float(monto))))  # Strip decimals by round
+    monto = monto.replace(",", ".").strip()  # Normalize decimal format
+    monto = str(
+        int(round_half_up(float(monto)))
+    )  # Round to the ceil value, and then strip decimals
     monto = checksum_verhoeff(monto, 2)
 
     suma: int = sum(map(int, [factura, nitci, fecha, monto]))

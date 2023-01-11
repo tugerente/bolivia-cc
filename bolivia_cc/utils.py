@@ -89,3 +89,8 @@ def base10to64(number: int) -> str:
         number = floor(number // 64)
 
     return result
+
+
+def round_half_up(n, decimals=0):
+    multiplier = 10**decimals
+    return floor(n * multiplier + 0.5) / multiplier

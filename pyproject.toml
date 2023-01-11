@@ -59,13 +59,21 @@
     target-version = ['py38']
 
 [tool.mypy]
-    files             = "bolivia_cc"
+    exclude           = ["tests/"]
+    modules           = ["bolivia_cc"]
+    mypy_path         = [""]
+    pretty            = true
     strict            = true
     enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 [tool.pytest.ini_options]
-    addopts   = "-vv"
+    addopts   = ""
     testpaths = ["tests"]
 
+[tool.coverage.run]
+    branch = true
+    omit   = ["*/__main__.py"]
+    source = ["bolivia_cc"]
+
 [tool.coverage.report]
-    exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:"]
+    exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:", "if __name__ == .__main__.:"]
