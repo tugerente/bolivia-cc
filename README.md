@@ -25,14 +25,14 @@ $ bolivia_cc --generar \
 ``` python
 import bolivia_cc
 
-codigo_control = bolivia_cc.generar(
-    autorizacion=7000000006000,
-    factura=560001,
-    nit=3200000,
-    fecha=2023-01-01,
-    total=10000,
-    llave="SECRET",
+codigo_control = bolivia_cc.generate_control_code(
+    autorizacion="20040010113",
+    factura="665",
+    nitci="1004141023",
+    fecha="20070108",
+    monto="905.23",
+    llave="442F3w5AggG7644D737asd4BH5677sasdL4%44643(3C3674F4",
 )
 
-assert codigo_control == "7B-F3-48-A8"
+assert codigo_control == "771-D5-61-C8"
 ```
