@@ -1,7 +1,5 @@
-from base64 import b64encode
 from math import floor
 from re import findall
-from typing import Union
 
 from bolivia_cc.utils import arc4_encrypt, base10to64, checksum_verhoeff
 
