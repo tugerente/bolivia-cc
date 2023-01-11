@@ -3,9 +3,7 @@ from math import floor
 from re import findall
 from typing import Union
 
-from bolivia_cc.utils import arc4_encrypt
-from bolivia_cc.utils import base10to64
-from bolivia_cc.utils import checksum_verhoeff
+from bolivia_cc.utils import arc4_encrypt, base10to64, checksum_verhoeff
 
 
 def generate_control_code(
